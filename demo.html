@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Backand ORM</title>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        #oauth2 button {
+            margin-top: 20px;
+            margin-left: 20px;
+        }
+        .output{
+            margin-bottom:10px;
+        }
+    </style>
+</head>
+<body>
+
+<!--authentication-->
+<div class="row">
+    <div class="col-md-12">
+        <section id="oauth2">
+            <div class="page-header">
+                <h1>
+                    authentication<small>
+                    (<a target="_blank" href="">backand.security.authentication</a>)
+                </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class='well'>
+                        <fieldset>
+                            <legend>
+                                User Credentials:
+                            </legend>
+                            <div>
+                                <label class="col-md-2">
+                                    username:
+                                    <input name="username" value="guest@backand.com" />
+                                </label>
+                            </div>
+                            <div>
+                                <label class="col-md-2">
+                                    password:
+                                    <input name="password" value="guest1234" />
+                                </label>
+                            </div>
+                            <div>
+                                <label class="col-md-2">
+                                    appname:
+                                    <input name="appname" value="restdemo" />
+                                </label>
+                            </div>
+                            <button>login</button>
+                        </fieldset>
+                            <pre>
+var username = $('input[name=username]').val();
+var password = $('input[name=password]').val();
+var appname = $('input[name=appname]').val();
+backand.security.authentication.login(username, password, appname, successCallback, errorCallback);</pre>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="output">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<!--CRUD-->
+<div class="row">
+    <div class="col-md-12">
+        <section id="crud">
+            <div class="page-header">
+                <h1>
+                    CRUD<small>
+                    (<a target="_blank" href="">backand.model</a>)
+                </small>
+                </h1>
+            </div>
+            <div class="row">
+                <div id="create" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button><font size="10">C</font>reate</button>
+                            <div>
+                                    <pre>
+var employee = { "First_Name": "Nir", "Last_Name": "Kaufman" };
+backand.model.Employees.create(employee, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="readSingleFilter" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button class="crud-read"><font size="10">R</font>ead</button>
+                            <span>Read list filtered by a single value</span>
+
+                            <div>
+                                    <pre>
+var pageNumber = 1;
+var pageSize = 10;
+var filter = { fieldName: "First_Name", operator: backand.filter.operator.text.equals, value: "Nir" };
+var sort = { fieldName: "Last_Name", order: "desc" };
+var search = null;
+var deep = true;
+
+backand.model.Employees.getList(pageNumber, pageSize, filter, sort, search, deep, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="readMultiFilter" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button class="crud-read"><font size="10">R</font>ead</button>
+                            <span>Read list filtered by array of values</span>
+
+                            <div>
+                                    <pre>
+var pageNumber = 1;
+var pageSize = 10;
+var filter = [{ fieldName: "First_Name", operator: backand.filter.operator.text.startsWith, value: "Nir" }, { fieldName: "Last_Name", operator: backand.filter.operator.text.contains, value: "k" }];
+var sort = [{ fieldName: "Last_Name", order: "desc" }, { fieldName: "First_Name", order: "desc" }];
+var search = null;
+var deep = true;
+
+backand.model.Employees.getList(pageNumber, pageSize, filter, sort, search, deep, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="readById" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button class="crud-read"><font size="10">R</font>ead</button>
+                            <span>Read by id</span>
+                            <div>
+                                    <pre>
+backand.model.Employees.get(146, false, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="update" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button><font size="10">U</font>pdate</button>
+                            <div>
+                                    <pre>
+var id = 145;
+var employee = { "First_Name": "Nir2", "Last_Name": "Kaufman2" };
+backand.model.Employees.update(id, employee, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+                <div id="delete" class="row">
+                    <div class="col-md-8">
+                        <div class='well'>
+
+                            <button><font size="10">D</font>elete</button>
+                            <div>
+                                    <pre>
+var id = 145;
+backand.model.Employees.delete(id, successCallback, errorCallback);</pre>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="output">
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="backand.js"></script>
+<script src="jquery.backand.js"></script>
+<script src="demo.js"></script>
+</body>
+</html>
