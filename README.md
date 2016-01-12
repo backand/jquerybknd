@@ -1,5 +1,6 @@
 # jquerybknd
 
-This is a demo of how to use Backand with jquery  
-It is a static web site, simply download and open demo.html
+Backand simple SDK for JavaScript & jQuery
+
+To view the demo web page, simply run demo.html
 
